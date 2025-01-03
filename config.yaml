@@ -1,0 +1,8 @@
+settings:
+  seed: 0
+  num_cv_folds: 5
+paths:
+  raw_data: './data/raw_data'
+  processed_data: './data/processed_data'
+  logging: './data/logging'
+  plots: './data/plots'
