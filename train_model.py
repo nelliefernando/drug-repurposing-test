@@ -25,6 +25,18 @@ import matplotlib.pyplot as plt
 def concatenate_model_performances(
     full_mean_scores_df, cv_results_dummy, cv_results_logreg, cv_results_xgb, score
 ):
+    """Calculate mean model performance and concatenate to dataframe.
+
+    Args:
+        full_mean_scores_df (pd.Dataframe): empty dataframe that is added to in each iteration of the function.
+        cv_results_dummy (dict): array of scores for each run of the cross validation for the dummy model.
+        cv_results_logreg (dict): array of scores for each run of the cross validation for the logistic regression model.
+        cv_results_xgb (dict): array of scores for each run of the cross validation for the xgboost model.
+        score (str): score used to evaluate performance.
+
+    Returns:
+        pd.DataFrame: dataframe containing score type and model performances.
+    """
     mean_score_dummy = round(cv_results_dummy["test_" + score].mean(), 2)
     mean_score_logreg = round(cv_results_logreg["test_" + score].mean(), 2)
     mean_score_xgb = round(cv_results_xgb["test_" + score].mean(), 2)
@@ -42,6 +54,16 @@ def concatenate_model_performances(
 
 
 def plot_calibration_plot(probs_dict, output_dir, fig_name):
+    """Plots a calibration plot, and handles plotting a varying number of lines.
+
+    Args:
+        probs_dict (dict): contains the name(s) of the model(s) and a list of predicted and true probailities.
+        output_dir (str): output path.
+        fig_name (str): name of figure.
+
+    Returns:
+        None.
+    """
     plt.figure(figsize=(5, 5))
     plt.plot([0, 1], [0, 1], linestyle="--")
 

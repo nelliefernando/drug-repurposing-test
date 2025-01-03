@@ -13,6 +13,18 @@ def map_embeddings_to_ground_truth(
     id_col="id",
     embedding_col="topological_embedding",
 ):
+    """Creates a column with the mapping of embedding to the chosen string column in ground truth.
+
+    Args:
+        ground_truth_df (pd.DataFrame): contains id of drug, disease and whether the drug treats the disease.
+        embeddings_df (pd.DataFrame): contains embeddings from the knowledge graph.
+        col_to_map (str): name of column to map to embedding in ground_truth_df.
+        id_col (str, optional): name of id column in embeddings_df. Defaults to "id".
+        embedding_col (str, optional): name of embedding column in embeddings_df. Defaults to "topological_embedding".
+
+    Returns:
+        pd.DataFrame: input dataframe with additional embedding columns.
+    """
     mapped_embeddings = ground_truth_df.merge(
         embeddings_df[[id_col, embedding_col]],
         left_on=col_to_map,
